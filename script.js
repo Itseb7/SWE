@@ -30,6 +30,10 @@ form.addEventListener('submit', async (e) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
+    const submit = document.getElementById('submit');
+submit.addEventListener("click", function (event) {
+event.preventDefault()
+alert(5)})
 
     // التحقق من تطابق كلمات المرور
     if (password !== confirmPassword) {

@@ -1,100 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <title>Salik - Sign Up</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* التنسيقات العامة */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #f5f5f5;
-        }
-
-        .signup-box {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            width: 400px;
-        }
-
-        h1 {
-            color: #2E7D32;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #757575;
-            margin-bottom: 30px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            margin: 10px 0;
-            transition: all 0.3s;
-        }
-
-        .divider {
-            color: #757575;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #ddd;
-            margin: 0 10px;
-        }
-
-        .social-btn i {
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="signup-box">
-        <h1>Sign up</h1>
-        <p class="subtitle">Create your account</p>
-
-        <form id="signupForm">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-            
-            <button type="submit">Create Account</button>
-        </form>
-
-        <div class="divider">or</div>
-
-        <button>Already have an account</button>
-
-        <button class="social-btn">
-            <i class="fab fa-google"></i>
-            Sign up with Google
-        </button>
-    </div>
-
-    <script src="firebase_config.js"></script>
-</body>
-</html>
+   
