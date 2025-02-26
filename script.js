@@ -1,11 +1,9 @@
-// Import the functions you need from the SDKs you need
+// Initialize Firebase
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, setDoc, doc, serverTimestamp } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyClE1Pacj0iGZ2rOY7YMPHdfwoUzuYu8ow",
   authDomain: "swee-98fd1.firebaseapp.com",
@@ -18,7 +16,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Form submission event
+const form = document.getElementById('signupForm');
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -26,62 +29,55 @@ form.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-    // التحقق من تطابق كلمات المرور
+    // Validate if passwords match
     if (password !== confirmPassword) {
-        showError('كلمات المرور غير متطابقة');
+        showError('Passwords do not match.');
         return;
     }
 
     try {
-        // التحقق من وجود البريد الإلكتروني
-        const methods = await auth.fetchSignInMethodsForEmail(email);
-        if (methods.length > 0) {
-            showError('البريد الإلكتروني مستخدم مسبقاً');
-            return;
-        }
-
-        // إنشاء المستخدم
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        // Create user with Firebase
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         
-        // حفظ بيانات إضافية في Firestore
-        await db.collection('users').doc(userCredential.user.uid).set({
+        // Save additional data in Firestore
+        await setDoc(doc(db, 'users', userCredential.user.uid), {
             email: email,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            createdAt: serverTimestamp()
         });
 
-        alert('تم التسجيل بنجاح!');
-        form.reset();
+        // Redirect to the main page after successful registration
+        alert('Account created successfully!');
+        window.location.href = 'home.html'; // Change 'home.html' to your main page URL
     } catch (error) {
         handleFirebaseError(error);
     }
 });
 
+// Handle Firebase errors
 function handleFirebaseError(error) {
     switch (error.code) {
         case 'auth/email-already-in-use':
-            showError('البريد الإلكتروني مستخدم بالفعل');
+            showError('This email is already in use.');
             break;
         case 'auth/invalid-email':
-            showError('تنسيق البريد الإلكتروني غير صحيح');
+            showError('Invalid email format.');
             break;
         case 'auth/weak-password':
-            showError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+            showError('Password must be at least 6 characters long.');
             break;
         default:
-            showError('حدث خطأ غير متوقع: ' + error.message);
+            showError('An unexpected error occurred: ' + error.message);
     }
 }
-// إظهار/إخفاء كلمة المرور
-document.querySelectorAll('.password-toggle').forEach(icon => {
-    icon.addEventListener('click', () => {
-        const passwordField = icon.previousElementSibling;
-        passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
-        icon.classList.toggle('fa-eye-slash');
-    });
-});
 
-// التحقق من قوة كلمة المرور
-function checkPasswordStrength(password) {
-    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return strongRegex.test(password);
+// Show error messages
+function showError(message) {
+    const error = document.createElement('div');
+    error.className = 'error-message';
+    error.textContent = message;
+    error.style.color = '#d32f2f';
+    error.style.fontSize = '14px';
+    error.style.marginTop = '-10px';
+    error.style.marginBottom = '10px';
+    form.prepend(error);
 }

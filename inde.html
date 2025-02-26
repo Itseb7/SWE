@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <title>Salik - Sign Up</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -93,70 +95,6 @@
         </button>
     </div>
 
-    <script>
-        const form = document.getElementById('signupForm');
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            // Reset previous errors
-            clearErrors();
-
-            // Validation
-            let isValid = true;
-
-            if (!validateEmail(email)) {
-                showError(email, 'Invalid email format');
-                isValid = false;
-            }
-
-            if (password.length < 8) {
-                showError(password, 'Password must be at least 8 characters');
-                isValid = false;
-            }
-
-            if (password !== confirmPassword) {
-                showError(confirmPassword, 'Passwords do not match');
-                isValid = false;
-            }
-
-            if (isValid) {
-                alert('Account created successfully!');
-                form.reset();
-            }
-        });
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function showError(input, message) {
-            const error = document.createElement('div');
-            error.className = 'error-message';
-            error.textContent = message;
-            error.style.color = '#d32f2f';
-            error.style.fontSize = '14px';
-            error.style.marginTop = '-10px';
-            error.style.marginBottom = '10px';
-            input.after(error);
-            
-            // Add error styling
-            input.style.borderColor = '#d32f2f';
-            input.style.boxShadow = '0 0 0 2px rgba(211,47,47,0.2)';
-        }
-
-        function clearErrors() {
-            document.querySelectorAll('.error-message').forEach(e => e.remove());
-            document.querySelectorAll('input').forEach(input => {
-                input.style.borderColor = '#ddd';
-                input.style.boxShadow = 'none';
-            });
-        }
-    </script>
+    <script src="firebase_config.js"></script>
 </body>
 </html>
