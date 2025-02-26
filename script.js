@@ -1,24 +1,25 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-analytics.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyClE1Pacj0iGZ2rOY7YMPHdfwoUzuYu8ow",
-  authDomain: "swee-98fd1.firebaseapp.com",
-  projectId: "swee-98fd1",
-  storageBucket: "swee-98fd1.firebasestorage.app",
-  messagingSenderId: "857642178096",
-  appId: "1:857642178096:web:44bfbe4e6daa033db5fff5",
-  measurementId: "G-DNR2GPEFHM"
+    apiKey: "AIzaSyClE1Pacj0iGZ2rOY7YMPHdfwoUzuYu8ow",
+    authDomain: "swee-98fd1.firebaseapp.com",
+    projectId: "swee-98fd1",
+    storageBucket: "swee-98fd1.appspot.com",
+    messagingSenderId: "857642178096",
+    appId: "1:857642178096:web:44bfbe4e6daa033db5fff5",
+    measurementId: "G-DNR2GPEFHM"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 // إحضار نموذج التسجيل
 const form = document.getElementById('signupForm');
@@ -30,10 +31,6 @@ form.addEventListener('submit', async (e) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    const submit = document.getElementById('submit');
-submit.addEventListener("click", function (event) {
-event.preventDefault()
-alert(5)})
 
     // التحقق من تطابق كلمات المرور
     if (password !== confirmPassword) {
@@ -73,7 +70,7 @@ alert(5)})
         // نقل المستخدم إلى الصفحة الرئيسية بعد نجاح التسجيل
         alert('تم التسجيل بنجاح!');
         form.reset();
-        window.location.href = 'home.html';  // استبدل "home.html" بالصفحة الرئيسية الخاصة بك
+        window.location.href = 'home.html'; 
         
     } catch (error) {
         handleFirebaseError(error);
@@ -99,7 +96,7 @@ function handleFirebaseError(error) {
 
 // التحقق من قوة كلمة المرور
 function checkPasswordStrength(password) {
-    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
     return strongRegex.test(password);
 }
 
