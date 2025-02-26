@@ -1,9 +1,10 @@
-// Initialize Firebase
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 import { getFirestore, setDoc, doc, serverTimestamp } from "firebase/firestore";
 
-// Firebase config
+// Firebase Configuration (اتركها كما هي)
 const firebaseConfig = {
   apiKey: "AIzaSyClE1Pacj0iGZ2rOY7YMPHdfwoUzuYu8ow",
   authDomain: "swee-98fd1.firebaseapp.com",
@@ -16,12 +17,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const auth = getAuth();
 const db = getFirestore(app);
 
-// Form submission event
+// إحضار نموذج التسجيل
 const form = document.getElementById('signupForm');
 
+// التعامل مع حدث إرسال النموذج
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -29,55 +31,81 @@ form.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
-    // Validate if passwords match
+    // التحقق من تطابق كلمات المرور
     if (password !== confirmPassword) {
-        showError('Passwords do not match.');
+        showError('كلمات المرور غير متطابقة');
+        return;
+    }
+
+    // التحقق من صحة البريد الإلكتروني
+    if (!validateEmail(email)) {
+        showError('تنسيق البريد الإلكتروني غير صحيح');
+        return;
+    }
+
+    // التحقق من أن كلمة المرور قوية
+    if (!checkPasswordStrength(password)) {
+        showError('كلمة المرور يجب أن تكون قوية');
         return;
     }
 
     try {
-        // Create user with Firebase
+        // التحقق من وجود البريد الإلكتروني
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        if (methods.length > 0) {
+            showError('البريد الإلكتروني مستخدم مسبقاً');
+            return;
+        }
+
+        // إنشاء المستخدم
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         
-        // Save additional data in Firestore
+        // حفظ بيانات إضافية في Firestore
         await setDoc(doc(db, 'users', userCredential.user.uid), {
             email: email,
             createdAt: serverTimestamp()
         });
 
-        // Redirect to the main page after successful registration
-        alert('Account created successfully!');
-        window.location.href = 'home.html'; // Change 'home.html' to your main page URL
+        // نقل المستخدم إلى الصفحة الرئيسية بعد نجاح التسجيل
+        alert('تم التسجيل بنجاح!');
+        form.reset();
+        window.location.href = 'home.html';  // استبدل "home.html" بالصفحة الرئيسية الخاصة بك
+        
     } catch (error) {
         handleFirebaseError(error);
     }
 });
 
-// Handle Firebase errors
+// التعامل مع الأخطاء
 function handleFirebaseError(error) {
     switch (error.code) {
         case 'auth/email-already-in-use':
-            showError('This email is already in use.');
+            showError('البريد الإلكتروني مستخدم بالفعل');
             break;
         case 'auth/invalid-email':
-            showError('Invalid email format.');
+            showError('تنسيق البريد الإلكتروني غير صحيح');
             break;
         case 'auth/weak-password':
-            showError('Password must be at least 6 characters long.');
+            showError('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
             break;
         default:
-            showError('An unexpected error occurred: ' + error.message);
+            showError('حدث خطأ غير متوقع: ' + error.message);
     }
 }
 
-// Show error messages
+// التحقق من قوة كلمة المرور
+function checkPasswordStrength(password) {
+    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return strongRegex.test(password);
+}
+
+// التحقق من تنسيق البريد الإلكتروني
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// إظهار الأخطاء
 function showError(message) {
-    const error = document.createElement('div');
-    error.className = 'error-message';
-    error.textContent = message;
-    error.style.color = '#d32f2f';
-    error.style.fontSize = '14px';
-    error.style.marginTop = '-10px';
-    error.style.marginBottom = '10px';
-    form.prepend(error);
+    alert(message);  // يمكن استبداله بإظهار الخطأ في واجهة المستخدم بشكل أكثر تخصيصًا
 }
