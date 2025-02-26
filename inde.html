@@ -1,12 +1,159 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> موقعي الاول</title>
-     <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1> Hello world! </h1>
-        <button id="myButton">انقر هنا</button>
-        <script src="script.js"></script>
-    </body>
+<head>
+    <title>Salik - Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* التنسيقات العامة */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+
+        .signup-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        h1 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #757575;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+
+        .divider {
+            color: #757575;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+            margin: 0 10px;
+        }
+
+        .social-btn i {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-box">
+        <h1>Sign up</h1>
+        <p class="subtitle">Create your account</p>
+
+        <form id="signupForm">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            
+            <button type="submit">Create Account</button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <button>Already have an account</button>
+
+        <button class="social-btn">
+            <i class="fab fa-google"></i>
+            Sign up with Google
+        </button>
+    </div>
+
+    <script>
+        const form = document.getElementById('signupForm');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Reset previous errors
+            clearErrors();
+
+            // Validation
+            let isValid = true;
+
+            if (!validateEmail(email)) {
+                showError(email, 'Invalid email format');
+                isValid = false;
+            }
+
+            if (password.length < 8) {
+                showError(password, 'Password must be at least 8 characters');
+                isValid = false;
+            }
+
+            if (password !== confirmPassword) {
+                showError(confirmPassword, 'Passwords do not match');
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Account created successfully!');
+                form.reset();
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showError(input, message) {
+            const error = document.createElement('div');
+            error.className = 'error-message';
+            error.textContent = message;
+            error.style.color = '#d32f2f';
+            error.style.fontSize = '14px';
+            error.style.marginTop = '-10px';
+            error.style.marginBottom = '10px';
+            input.after(error);
+            
+            // Add error styling
+            input.style.borderColor = '#d32f2f';
+            input.style.boxShadow = '0 0 0 2px rgba(211,47,47,0.2)';
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(e => e.remove());
+            document.querySelectorAll('input').forEach(input => {
+                input.style.borderColor = '#ddd';
+                input.style.boxShadow = 'none';
+            });
+        }
+    </script>
+</body>
 </html>
