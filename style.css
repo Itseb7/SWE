@@ -1,8 +1,9 @@
 body {
     text-align: center;
     font-family: Arial, sans-serif;
-padding: 50px;
+    padding: 50px;
 }
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -10,4 +11,10 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
 }
