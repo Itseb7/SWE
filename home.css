@@ -1,0 +1,121 @@
+/* 🟢 تنسيق الصفحة */
+body {
+    font-family: 'Inter', sans-serif;
+    direction: rtl;
+    text-align: right;
+    background-color: #E3F2F1;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🟢 شريط العنوان */
+header {
+    background: #008E97;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🟢 تنسيق شعار سالك */
+.logo {
+    height: 60px;
+    width: 60px;
+    border-radius: 70%;
+    object-fit: cover;
+    background-color: transparent;
+}
+
+/* 🟢 زر تسجيل الخروج */
+header button {
+    background: white;
+    color: #008E97;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+header button:hover {
+    background: #f0f0f0;
+}
+
+/* 🟢 محتوى الصفحة الرئيسية */
+.container {
+    width: 90%;
+    max-width: 420px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #008E97;
+    text-align: center;
+}
+
+.container h2 {
+    color: #005F64;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.container p {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* 🟢 قائمة الخيارات */
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    background: #008E97;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.option:hover {
+    background: #00727A;
+}
+
+/* 🟢 شريط التنقل السفلي */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #008E97;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-nav a {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.bottom-nav a:hover, .bottom-nav .active {
+    background: #00727A;
+    padding: 10px;
+    border-radius: 5px;
+}
