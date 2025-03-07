@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="homeTitle">سالك - الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <!-- 🟢 شريط العنوان مع شعار سالك -->
+    <header>
+        <img src="salik-logo.png" alt="شعار سالك" class="logo">
+        <button id="logoutBtn">تسجيل الخروج</button>
+    </header>
+
+    <!-- 🟢 محتوى الصفحة الرئيسية -->
+    <div class="container">
+        <h2 id="welcomeMessage">مرحبًا بك في سالك! </h2>
+
+        <!-- 🟢 قائمة الخيارات -->
+        <div class="options">
+            <a href="ticket.html" class="option" id="ticketsOption"> التذاكر</a>
+            <a href="MetroRoutes.html" class="option" id="routesOption"> استعراض المسارات</a>
+            <a href="ticketOffers.html" class="option" id="offersOption"> العروض والخصومات</a>
+            <a href="payments.html" class="option" id="paymentsOption"> سجل المدفوعات</a>
+            <a href="profile.html" class="option" id="profileOption"> إعدادات الحساب</a>
+            <a href="language.html" class="option" id="languageOption"> تغيير اللغة</a>
+        </div>
+    </div>
+
+    <script src="language.js"></script> <!-- 🔹 تحميل اللغة المختارة تلقائيًا -->
+    <script src="home.js"></script>
+
+</body>
+</html>

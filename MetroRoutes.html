@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسارات المترو</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9faf3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #777;
+        }
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+            border: none;
+            transition: 0.3s;
+        }
+        .active {
+            background-color: #71c54c;
+            color: white;
+        }
+        .metro-list {
+            list-style: none;
+            padding: 0;
+        }
+        .metro-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .metro-item:hover {
+            background: #e9ecef;
+        }
+        .metro-item span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .blue { background: #007bff; }
+        .red { background: #dc3545; }
+        .orange { background: #fd7e14; }
+        .yellow { background: #ffc107; }
+        .green { background: #28a745; }
+        .purple { background: #6f42c1; }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+        }
+        .bottom-nav div {
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .bottom-nav div:hover {
+            color: #71c54c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>المسارات</h2>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="ابحث عن مسار أو محطة">
+            <button>🔍</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" id="metroTab">مترو</button>
+            <button class="tab" id="busTab">حافلة</button>
+        </div>
+
+        <ul class="metro-list" id="metroList">
+            <li class="metro-item" onclick="showAlert('المسار الأزرق')"><span>المسار الأزرق</span> <div class="icon blue">1</div></li>
+            <li class="metro-item" onclick="showAlert('المسار الأحمر')"><span>المسار الأحمر</span> <div class="icon red">2</div></li>
+            <li class="metro-item" onclick="showAlert('المسار البرتقالي')"><span>المسار البرتقالي</span> <div class="icon orange">3</div></li>
+            <li class="metro-item" onclick="showAlert('المسار الأصفر')"><span>المسار الأصفر</span> <div class="icon yellow">4</div></li>
+            <li class="metro-item" onclick="showAlert('المسار الأخضر')"><span>المسار الأخضر</span> <div class="icon green">5</div></li>
+            <li class="metro-item" onclick="showAlert('المسار البنفسجي')"><span>المسار البنفسجي</span> <div class="icon purple">6</div></li>
+        </ul>
+    </div>
+
+    <div class="bottom-nav">
+        <div>🏠 الرئيسية</div>
+        <div>🎫 التذاكر</div>
+        <div>⭐ المفضلة</div>
+    </div>
+
+    <script>
+        // البحث في المسارات
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let items = document.querySelectorAll(".metro-item");
+
+            items.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+
+        // تغيير التبويب بين مترو وحافلة
+        document.getElementById("metroTab").addEventListener("click", function() {
+            this.classList.add("active");
+            document.getElementById("busTab").classList.remove("active");
+            document.getElementById("metroList").style.display = "block";
+        });
+
+        document.getElementById("busTab").addEventListener("click", function() {
+            this.classList.add("active");
+            document.getElementById("metroTab").classList.remove("active");
+            document.getElementById("metroList").style.display = "none";
+            alert("لم يتم إضافة مسارات الحافلة بعد! 🚍");
+        });
+
+        // عرض تنبيه عند الضغط على مسار
+        function showAlert(route) {
+            alert("تم اختيار: " + route);
+        }
+    </script>
+
+</body>
+</html>
