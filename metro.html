@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Routes</title>
+  <link rel="stylesheet" href="metro.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <a href="MetroRoutes.html" class="back-button">← Back</a>
+
+  <h1>🚆 Search Routes</h1>
+  <label for="location">🔹 Start Station:</label>
+  <select id="location"></select>
+
+  <label for="destination">🔹 Destination Station:</label>
+  <select id="destination"></select>
+
+  <button onclick="findBestRoute()">🔍 Search</button>
+
+  <h3>🗺 Route Map</h3>
+  <div id="map"></div>
+
+  <p id="result"></p>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="metro.js"></script>
+</body>
+</html>

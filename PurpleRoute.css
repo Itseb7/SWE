@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .purple {
+    background-color: #9933cc;
+  }
+  
+  .line-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 22px;
+  }
+  
+  .number {
+    font-size: 20px;
+  }
+  
+  .line-name {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  
+  .station-list {
+    list-style: none;
+    padding: 20px;
+    padding-right: 30px;
+  }
+  
+  .station-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .purple-dot {
+    background-color: #9933cc;
+  }
+  
+  .map-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #9933cc;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .last-stop {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    font-weight: bold;
+  }
+  

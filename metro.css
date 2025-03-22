@@ -1,0 +1,71 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  background-color: rgb(241, 245, 245);
+  padding: 20px;
+  margin: 0;
+}
+
+h1 {
+  color: #00796B;
+  font-size: 24px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+select {
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #26A69A;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color: #00796B;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #004D40;
+}
+
+#map {
+  height: 500px;
+  width: 100%;
+  margin-top: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  filter: grayscale(10%) brightness(1.1); /* تبسيط الخريطة */
+}
+
+#result {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  padding: 10px;
+  background: #FFF;
+  border: 2px solid #00796B;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  color: #00796B;
+  font-weight: bold;
+  font-size: 18px;
+}
