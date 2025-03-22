@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Summary - Salik</title>
+  <link rel="stylesheet" href="salik.css">
+  <style>
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  </style>
+</head>
+<body class="fade-in">
+   <img src="logo.png" alt="Salik Logo" 
+    class="salik-logo">
+  <a href="ticket.html" class="back-arrow">← Back</a>
+
+  <div class="container">
+    <h2>Order Summary</h2>
+    <div id="ticket-summary"></div>
+    <div class="total">Total: <span id="total-price">0</span> SAR</div>
+    <button class="main-btn" onclick="goToPayment()">Proceed to Payment</button>
+  </div>
+
+  <script>
+    const ticketNames = {
+      regular: "Regular Ticket",
+      daily: "Daily Ticket",
+      weekly: "Weekly Ticket"
+    };
+
+    const tickets = JSON.parse(localStorage.getItem("tickets"));
+    const total = localStorage.getItem("total");
+
+    const summaryDiv = document.getElementById("ticket-summary");
+    const totalSpan = document.getElementById("total-price");
+
+    let totalTickets = 0;
+
+    for (const type in tickets) {
+      if (tickets[type] > 0) {
+        const div = document.createElement("div");
+        div.className = "ticket-type";
+        div.textContent = `${ticketNames[type]} × ${tickets[type]}`;
+        summaryDiv.appendChild(div);
+        totalTickets += tickets[type];
+      }
+    }
+
+    if (totalTickets === 0) {
+      window.location.href = "ticket.html";
+    }
+
+    totalSpan.textContent = total;
+
+    function goToPayment() {
+      document.body.classList.remove('fade-in');
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = "payment.html";
+      }, 300);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Salik</title>
+  <link rel="stylesheet" href="salik.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #e0f7f7, #f0fdfd);
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.06;
+      width: 100%;
+      max-width: 700px;
+      z-index: 0;
+    }
+
+    .welcome-content {
+      z-index: 1;
+      text-align: center;
+    }
+
+    .welcome-content h1 {
+      font-size: 36px;
+      color: #008b8b;
+      margin-bottom: 10px;
+    }
+
+    .welcome-content p {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Salik Logo" class="logo-bg">
+
+  <div class="welcome-content fade-in">
+    <h1>Welcome to Salik</h1>
+    <p>Your smart metro ticketing companion</p>
+
+    <div class="button-group">
+      <button class="main-btn" onclick="goNext()">Start</button>
+    </div>
+ 
+
+  <script>
+    function goNext() {
+      window.location.href = "index.html"; // مؤقتاً، لاحقاً login.html
+    }
+
+  </script>
+</body>
+</html>

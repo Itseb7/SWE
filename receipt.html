@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Ticket - Salik</title>
+  <link rel="stylesheet" href="salik.css">
+  <style>
+    .receipt {
+      text-align: center;
+    }
+
+    .barcode {
+      margin: 20px auto;
+      width: 180px;
+    }
+
+    .detail {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+
+    .big {
+      font-size: 22px;
+      font-weight: bold;
+      color: #008b8b;
+    }
+
+    .main-btn {
+      background-color: #008b8b;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 25px;
+    }
+
+    .main-btn:hover {
+      background-color: #006e6e;
+    }
+
+    .salik-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: auto;
+      opacity: 0.9;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <img src="logo.png" alt="Salik Logo" class="salik-logo">
+
+  <div class="container receipt">
+    <h2>Thank you for your purchase!</h2>
+
+    <p class="detail">Name: <span id="card-name"></span></p>
+    <p class="detail">Tickets:</p>
+    <div id="ticket-list"></div>
+    <p class="big">Total: <span id="total-amount"></span> SAR</p>
+    <p class="detail">Date: <span id="date"></span></p>
+
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=SALIK-TICKET" alt="QR Code" class="barcode">
+
+    <button class="main-btn" onclick="goHome()">Go to Home</button>
+  </div>
+
+  <script>
+    const latest = JSON.parse(localStorage.getItem("latestReceipt"));
+  
+    if (!latest) {
+      document.querySelector(".container").innerHTML = `
+        <h2 style="text-align:center;">No recent receipt found.</h2>
+        <button class="main-btn" onclick="goHome()">Go to Home</button>
+      `;
+    } else {
+      document.getElementById("card-name").textContent = latest.name;
+      document.getElementById("total-amount").textContent = latest.total;
+      document.getElementById("date").textContent = latest.date;
+  
+      const ticketNames = {
+        regular: "Regular Ticket",
+        daily: "Daily Ticket",
+        weekly: "Weekly Ticket"
+      };
+  
+      const listDiv = document.getElementById("ticket-list");
+      for (const type in latest.tickets) {
+        if (latest.tickets[type] > 0) {
+          const p = document.createElement("p");
+          p.className = "detail";
+          p.textContent = `${ticketNames[type]} × ${latest.tickets[type]}`;
+          listDiv.appendChild(p);
+        }
+      }
+    }
+  
+    function goHome() {
+      document.body.classList.remove('fade-in');
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = "homepage.html";
+      }, 300);
+    }
+  </script>
+s  
+</body>
+</html>

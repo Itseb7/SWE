@@ -33,3 +33,11 @@ const firebaseConfig = {
         console.error('Error Signing out:', error);
     })
   })
+ 
+     
+
+  window.viewReceipt=function(){
+    window.location.href = 
+    "receipt.html";
+  };
+  

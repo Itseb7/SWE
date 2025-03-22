@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Purchase History - Salik</title>
+  <link rel="stylesheet" href="salik.css">
+  <style>
+    .salik-logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: auto;
+      opacity: 0.9;
+      z-index: 100;
+    }
+
+    .history-container {
+      max-width: 600px;
+      margin: 80px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .history-entry {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .history-entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-title {
+      font-weight: bold;
+      color: #008b8b;
+      margin-bottom: 8px;
+    }
+
+    .entry-detail {
+      font-size: 15px;
+      margin: 2px 0;
+      color: #444;
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <img src="logo.png" alt="Salik Logo" class="salik-logo">
+
+  <div class="history-container">
+    <h2 style="text-align: center; color: #008b8b;">Purchase History</h2>
+    <div id="history-list"></div>
+    <button class="main-btn" style="margin-top: 30px;" onclick="window.location.href='homepage.html'">Back to Home</button>
+
+  </div>
+
+  <script>
+    const history = JSON.parse(localStorage.getItem("receiptHistory")) || [];
+
+    const container = document.getElementById("history-list");
+
+    if (history.length === 0) {
+      container.innerHTML = "<p style='text-align:center;'>No previous purchases found.</p>";
+    } else {
+      history.forEach((entry, index) => {
+        const div = document.createElement("div");
+        div.className = "history-entry";
+
+        div.innerHTML = `
+          <div class="entry-title">Receipt #${index + 1}</div>
+          <div class="entry-detail">Name: ${entry.name}</div>
+          <div class="entry-detail">Total: ${entry.total} SAR</div>
+          <div class="entry-detail">Date: ${entry.date}</div>
+          <div class="entry-detail">Tickets:</div>
+        `;
+
+        for (const type in entry.tickets) {
+          if (entry.tickets[type] > 0) {
+            const ticketLine = document.createElement("div");
+            ticketLine.className = "entry-detail";
+            ticketLine.textContent = `- ${type.charAt(0).toUpperCase() + type.slice(1)} × ${entry.tickets[type]}`;
+            div.appendChild(ticketLine);
+          }
+        }
+
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+  /*pages:welcom,payment,ticket,recipt,summary/*/
+body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 40px;
+    background: linear-gradient(to bottom right, #e0f7f7, #f0fdfd);
+    min-height: 100vh;
+    transition: all 0.3s ease;
+  }
+  
+  .container {
+    max-width: 420px;
+    margin: auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #008b8b;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .ticket-box {
+    background-color: #f7fafa;
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .ticket-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .counter button {
+    padding: 6px 12px;
+    font-size: 16px;
+    background-color: #008b8b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .counter button:hover {
+    background-color: #006e6e;
+  }
+  
+  .total-box, .total {
+    background-color: #eefafa;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #008b8b;
+    margin-top: 20px;
+  }
+  
+  .ticket-type {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .main-btn {
+    margin-top: 25px;
+    padding: 12px;
+    background-color: #008b8b;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .main-btn:hover {
+    background-color: #006e6e;
+  }
+  
+  /* Page transition animations */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+  
+  .fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  /* Back arrow */
+  .back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #008b8b;
+    font-weight: bold;
+    background-color: #e6f9f9;
+    padding: 6px 12px;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .back-arrow:hover {
+    background-color: #d0f0f0;
+  }
+  .salik-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.9;
+    z-index: 100;
+  }
+  
