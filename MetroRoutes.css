@@ -109,4 +109,12 @@ body {
     background-color: #009999;
     color: white;
   }
-  
+  .salik-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.9;
+    z-index: 100;
+  }

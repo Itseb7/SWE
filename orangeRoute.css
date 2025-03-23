@@ -73,4 +73,12 @@ body {
     width: 8px;
     background-color: #ff8800;
   }
-  
+  .salik-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.9;
+    z-index: 100;
+  }
