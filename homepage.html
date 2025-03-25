@@ -1,66 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>مسارات محطات الباص في الرياض</title>
     <style>
         body {
-            padding: 30px;
-            background: linear-gradient(to right, #e2e2e2, #6ec2c5);
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            direction: rtl;
+            text-align: right;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
         h1 {
             text-align: center;
+            color: #27ae60;
         }
-        button {
-            color: rgb(40, 112, 113);
-            background-color: #5f9ea5b1;
+        .route {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 18px;
+        }
+        .route:hover {
+            background-color: #27ae60;
+        }
+        .stations {
+            display: none;
+            background-color: #ecf0f1;
             padding: 10px;
             border-radius: 5px;
-            font-size: 20px;
-            font-weight: bold;
-            border: none;
-            margin: 0;
+            margin-top: 10px;
         }
-        button:hover {
-            text-decoration: underline;
-            color: rgb(111, 201, 206);
-        }
-        #logout {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-        }
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-        div {
-            font-weight: 400;
-            color: rgb(12, 11, 11);
-        }
-        span {
-            font-weight: 600;
-            font-size: 22px;
-            color: black;
+        .station {
+            margin: 5px 0;
+            font-size: 16px;
         }
     </style>
-    <script type="module" src="./homepage.js"></script>
 </head>
 <body>
-    <img src="logo.png" alt="Salik Logo" class="salik-logo">
-    <h1>Welcome to the Homepage</h1>
-    <button id="logout">Logout</button>
 
-    <div class="button-group">
-        <button class="main-btn" onclick="viewReceipt()">View Receipt</button>
-        <button class="main-btn" onclick="window.location.href='history.html'">Go to History</button>
-        <button class="main-btn" onclick="window.location.href='ticket.html'">Book Ticket</button>
-        <button class="main-btn" onclick="window.location.href='MetroRoutes.html'">Metro Routes</button>
-        <button class="main-btn" onclick="window.location.href='BusStation.html'">Bus Station</button>
+<div class="container">
+    <h1>مسارات محطات الباص في الرياض</h1>
+
+    <div class="route" onclick="toggleStations('route1')">
+‎        مسار 1: طريق الملك عبدالله
     </div>
+    <div id="route1" class="stations">
+        <div class="station">محطة 1: الدائري الشرقي</div>
+        <div class="station">محطة 2: الرياض جاليري</div>
+        <div class="station">محطة 3: مركز الملك عبد الله المالي</div>
+        <div class="station">محطة 4: النخيل مول</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route2')">
+‎        مسار 2: طريق الملك فهد
+    </div>
+    <div id="route2" class="stations">
+        <div class="station">محطة 1: العليا</div>
+        <div class="station">محطة 2: مكتبة الملك فهد</div>
+        <div class="station">محطة 3: برج المملكة</div>
+        <div class="station">محطة 4: حي السفارات</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route3')">
+‎        مسار 3: طريق المطار
+    </div>
+    <div id="route3" class="stations">
+        <div class="station">محطة 1: محطة المطار</div>
+        <div class="station">محطة 2: حي الرمال</div>
+        <div class="station">محطة 3: حي السليمانية</div>
+    </div>
+
+‎    <!-- المسارات الجديدة -->
+    <div class="route" onclick="toggleStations('route4')">
+‎        مسار 4: طريق الدائري الغربي
+    </div>
+    <div id="route4" class="stations">
+        <div class="station">محطة 1: الحمراء</div>
+        <div class="station">محطة 2: مخرج 7</div>
+        <div class="station">محطة 3: جامعة الملك سعود</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route5')">
+‎        مسار 5: طريق الأمير محمد بن عبد العزيز
+    </div>
+    <div id="route5" class="stations">
+        <div class="station">محطة 1: معهد الإدارة العامة</div>
+        <div class="station">محطة 2: شارع التخصصي</div>
+        <div class="station">محطة 3: حي الملك فهد</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route6')">
+‎        مسار 6: طريق الأمير تركي الأول
+    </div>
+    <div id="route6" class="stations">
+        <div class="station">محطة 1: حي اليرموك</div>
+        <div class="station">محطة 2: مركز الشفا</div>
+        <div class="station">محطة 3: مركز الملك فهد الثقافي</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route7')">
+‎        مسار 7: طريق المدينة المنورة
+    </div>
+    <div id="route7" class="stations">
+        <div class="station">محطة 1: محطة النقل العام</div>
+        <div class="station">محطة 2: حي النخيل</div>
+        <div class="station">محطة 3: أسواق المعيقلات</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route8')">
+‎        مسار 8: طريق الأمير فيصل بن بندر
+    </div>
+    <div id="route8" class="stations">
+        <div class="station">محطة 1: حي الملقا</div>
+        <div class="station">محطة 2: الجامعة السعودية الإلكترونية</div>
+        <div class="station">محطة 3: حي المونسية</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route9')">
+‎        مسار 9: طريق ابو بكر الصديق
+    </div>
+    <div id="route9" class="stations">
+        <div class="station">محطة 1: حي الرفيعة</div>
+        <div class="station">محطة 2: حي الوزارات</div>
+        <div class="station">محطة 3: حي السلي</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route10')">
+‎        مسار 10: طريق الملك عبد العزيز
+    </div>
+    <div id="route10" class="stations">
+        <div class="station">محطة 1: حي الملز</div>
+        <div class="station">محطة 2: سوق البطحاء</div>
+        <div class="station">محطة 3: شارع الشيخ عبد الله</div>
+    </div>
+
+    <div class="route" onclick="toggleStations('route11')">
+‎        مسار 11: طريق الأمير نايف
+    </div>
+    <div id="route11" class="stations">
+        <div class="station">محطة 1: حي الشفاء</div>
+        <div class="station">محطة 2: حي الحمراء</div>
+        <div class="station">محطة 3: حي المربع</div>
+    </div>
+
+</div>
+
+<script>
+    function toggleStations(routeId) {
+        const stations = document.getElementById(routeId);
+        if (stations.style.display === "none" || stations.style.display === "") {
+            stations.style.display = "block";
+        } else {
+            stations.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
