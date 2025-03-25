@@ -1,105 +1,58 @@
-‏<!DOCTYPE html>
-‏<html lang="ar" dir="rtl">
-‏<head>
-‏    <meta charset="UTF-8">
-‏    <title>مسارات حافلات الرياض</title>
-‏    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-‏    <style>
-‏        :root {
-            --أخضر-داكن: #2d572c;
-            --أخضر-متوسط: #4caf50;
-            --أخضر-فاتح: #c8e6c9;
-        }
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusStation</title>
+    <link rel="stylesheet" href="BusStation.css">
+</head>
+<body>
 
-‏        body {
-‏            margin: 0;
-‏            background: var(--أخضر-فاتح);
-‏            font-family: 'Arial Arabic', sans-serif;
-        }
+    <!-- شريط العنوان والبحث -->
+    <header>
+        <h2>المسارات</h2>
+        <input type="text" placeholder="ابحث عن مسار أو محطة">
+    </header>
 
-        .c0ntainer {
-‏            display: grid;
-‏            grid-template-columns: 300px 1fr;
-‏            height: 100vh;
-        }
+    <!-- أزرار التبديل بين الحافلات والمترو -->
+    <div class="tabs">
+        <button class="active">حافلة</button>
+        <button>مترو</button>
+    </div>
 
-        .قائمة-المسارات {
-‏            background: white;
-‏            padding: 20px;
-‏            box-shadow: 3px 0 10px rgba(0,0,0,0.1);
-        }
+    <!-- قائمة المسارات -->
+    <div class="routes">
+        <div class="route" data-route="7" data-stations="مركز النقل العام,210 البطحاء,208 البطحاء,207 البطحاء,206 البطحاء,205 البطحاء,204 البطحاء,203 البطحاء,202 البطحاء,201 البطحاء,610 المربع,401 الوشم">
+            <span class="route-number">7</span>
+            <p>مركز النقل العام - جامعة الملك سعود</p>
+        </div>
+        <div class="route" data-route="8" data-stations="البطحاء, الصحافة">
+            <span class="route-number">8</span>
+            <p>البطحاء - الصحافة</p>
+        </div>
+        <div class="route" data-route="9" data-stations="مركز النقل العام, سوق الشمال للخضار">
+            <span class="route-number">9</span>
+            <p>مركز النقل العام - سوق الشمال للخضار</p>
+        </div>
+    </div>
 
-        .مسار {
-‏            padding: 15px;
-‏            margin: 10px 0;
-‏            background: var(--أخضر-فاتح);
-‏            border-right: 4px solid var(--أخضر-متوسط);
-‏            border-radius: 5px;
-‏            cursor: pointer;
-‏            transition: 0.3s;
-        }
+    <!-- نافذة العرض -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="popup-title"></h3>
+            <div id="station-list"></div>
+        </div>
+    </div>
 
-        .مسار:hover {
-‏            transform: translateX(10px);
-‏            background: var(--أخضر-متوسط);
-‏            color: white;
-        }
+    <!-- شريط التنقل السفلي -->
+    <nav class="bottom-nav">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">المسارات</a>
+        <a href="#">التذاكر</a>
+        <a href="#">المفضلة</a>
+    </nav>
 
-        #خريطة {
-‏            height: 100vh;
-        }
-‏    </style>
-‏</head>
-‏<body>
-‏    <div class="continer">
-‏        <div class="قائمة-المسارات" id="قائمة-المسارات"></div>
-‏        <div id="خريطة"></div>
-‏    </div>
-
-‏    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-‏    <script>
-        // بيانات افتراضية للمسارات
-‏        const المسارات = [
-            {
-                رقم: "الخط 1",
-                محطات: ["المدينة الجامعية", "المربع", "العليا"],
-                إحداثيات: [[24.8417, 46.7164], [24.6742, 46.6917], [24.6881, 46.6847]]
-            },
-            {
-                رقم: "الخط 2",
-                محطات: ["الشفا", "الملز", "النخيل"],
-                إحداثيات: [[24.6253, 46.7592], [24.6742, 46.6917], [24.7236, 46.6528]]
-            }
-        ];
-
-        // تهيئة الخريطة
-‏        const خريطة = L.map('خريطة').setView([24.7136, 46.6753], 12);
-‏        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(خريطة);
-
-        // عرض المسارات
-        المسارات.forEach(مسار => {
-‏            const عنصر = document.createElement('div');
-            عنصر.className = 'مسار';
-            عنصر.innerHTML = `
-‏                <h3>🚌 ${مسار.رقم}</h3>
-‏                <p>${مسار.محطات.join(' → ')}</p>
-            `;
-            
-            عنصر.addEventListener('click', () => {
-                خريطة.eachLayer(layer => layer instanceof L.Polyline && خريطة.removeLayer(layer));
-‏                L.polyline(مسار.إحداثيات, {color: '#2d572c'}).addTo(خريطة);
-                خريطة.fitBounds(مسار.إحداثيات);
-            });
-
-‏            document.getElementById('قائمة-المسارات').appendChild(عنصر);
-            
-            // إضافة العلامات
-            مسار.إحداثيات.forEach((coord, index) => {
-‏                L.marker(coord)
-‏                 .addTo(خريطة)
-‏                 .bindPopup(`<b style="color:#2d572c">${مسار.محطات[index]}</b>`);
-            });
-        });
-‏    </script>
-‏</body>
-‏</html>
+    <script src="script.js"></script>
+</body>
+</html>
