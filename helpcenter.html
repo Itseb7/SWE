@@ -3,77 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأسئلة الشائعة</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            direction: rtl;
-            text-align: right;
-            margin: 20px;
-        }
-        .faq {
-            border-bottom: 1px solid #ddd;
-            padding: 10px;
-            cursor: pointer;
-        }
-        .faq .question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .faq .answer {
-            display: none;
-            margin-top: 10px;
-            color: #555;
-        }
-        .faq .arrow {
-            transition: transform 0.3s ease;
-        }
-        .faq.active .answer {
-            display: block;
-        }
-        .faq.active .arrow {
-            transform: rotate(90deg);
-        }
-    </style>
+    <title>مركز المساعدة</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="faq" onclick="toggleAnswer(this)">
-        <div class="question">
-            <span>ما هي أسعار تذاكر مترو الرياض؟</span>
-            <span class="arrow">▶</span>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="showSection('faq')">الأسئلة الشائعة</button>
+            <button class="tab-button" onclick="showSection('contact')">اتصل بنا</button>
         </div>
-        <div class="answer">تذكرة ساعتين: 4 ريال - 3 أيام: 20 ريال - 7 أيام: 40 ريال - 30 يوم: 140 ريال</div>
+
+        <div id="faq" class="content-section">
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <span>ما هي أسعار تذاكر مترو الرياض؟</span>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="answer">تذكرة ساعتين: 4 ريال - 3 أيام: 20 ريال - 7 أيام: 40 ريال - 30 يوم: 140 ريال</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <span>هل يحتاج الأطفال إلى تذكرة؟</span>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="answer">الأطفال أقل من 6 سنوات يركبون مجانًا ولكن يجب أن يكونوا برفقة شخص بالغ.</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <span>أين يمكنني شراء التذكرة؟</span>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="answer">يمكن شراء التذاكر من مكاتب التذاكر في محطات المترو أو عبر التطبيق أو باستخدام بطاقات الدفع.</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleAnswer(this)">
+                <div class="question">
+                    <span>كيف يمكنني الدفع عبر تطبيق سالك؟</span>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="answer">يمكن الدفع عبر Apple Pay (لأجهزة iOS) أو بطاقات الائتمان والخصم (مدى، فيزا، ماستر كارد).</div>
+            </div>
+        </div>
+
+        <div id="contact" class="content-section hidden">
+            <div class="contact-box">
+                <p><strong>رقم الهاتف:</strong> 19933</p>
+                <p><strong>البريد الإلكتروني:</strong> customercare@riyadhbus.sa</p>
+                <label for="feedback">ملاحظاتك:</label>
+                <textarea id="feedback" placeholder="اكتب رسالتك هنا..."></textarea>
+                <button onclick="submitFeedback()">إرسال</button>
+            </div>
+        </div>
     </div>
 
-    <div class="faq" onclick="toggleAnswer(this)">
-        <div class="question">
-            <span>هل يحتاج الأطفال إلى تذكرة؟</span>
-            <span class="arrow">▶</span>
-        </div>
-        <div class="answer">الأطفال أقل من 6 سنوات يركبون مجانًا ولكن يجب أن يكونوا برفقة شخص بالغ.</div>
-    </div>
-
-    <div class="faq" onclick="toggleAnswer(this)">
-        <div class="question">
-            <span>أين يمكنني شراء التذكرة؟</span>
-            <span class="arrow">▶</span>
-        </div>
-        <div class="answer">يمكن شراء التذاكر من مكاتب التذاكر في محطات المترو أو عبر التطبيق أو باستخدام بطاقات الدفع.</div>
-    </div>
-
-    <div class="faq" onclick="toggleAnswer(this)">
-        <div class="question">
-            <span>كيف يمكنني الدفع عبر تطبيق سالك؟</span>
-            <span class="arrow">▶</span>
-        </div>
-        <div class="answer">يمكن الدفع عبر Apple Pay (لأجهزة iOS) أو بطاقات الائتمان والخصم (مدى، فيزا، ماستر كارد).</div>
-    </div>
-
-    <script>
-        function toggleAnswer(element) {
-            element.classList.toggle("active");
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
