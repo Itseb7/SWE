@@ -1,0 +1,105 @@
+‏<!DOCTYPE html>
+‏<html lang="ar" dir="rtl">
+‏<head>
+‏    <meta charset="UTF-8">
+‏    <title>مسارات حافلات الرياض</title>
+‏    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+‏    <style>
+‏        :root {
+            --أخضر-داكن: #2d572c;
+            --أخضر-متوسط: #4caf50;
+            --أخضر-فاتح: #c8e6c9;
+        }
+
+‏        body {
+‏            margin: 0;
+‏            background: var(--أخضر-فاتح);
+‏            font-family: 'Arial Arabic', sans-serif;
+        }
+
+        .c0ntainer {
+‏            display: grid;
+‏            grid-template-columns: 300px 1fr;
+‏            height: 100vh;
+        }
+
+        .قائمة-المسارات {
+‏            background: white;
+‏            padding: 20px;
+‏            box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .مسار {
+‏            padding: 15px;
+‏            margin: 10px 0;
+‏            background: var(--أخضر-فاتح);
+‏            border-right: 4px solid var(--أخضر-متوسط);
+‏            border-radius: 5px;
+‏            cursor: pointer;
+‏            transition: 0.3s;
+        }
+
+        .مسار:hover {
+‏            transform: translateX(10px);
+‏            background: var(--أخضر-متوسط);
+‏            color: white;
+        }
+
+        #خريطة {
+‏            height: 100vh;
+        }
+‏    </style>
+‏</head>
+‏<body>
+‏    <div class="continer">
+‏        <div class="قائمة-المسارات" id="قائمة-المسارات"></div>
+‏        <div id="خريطة"></div>
+‏    </div>
+
+‏    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+‏    <script>
+        // بيانات افتراضية للمسارات
+‏        const المسارات = [
+            {
+                رقم: "الخط 1",
+                محطات: ["المدينة الجامعية", "المربع", "العليا"],
+                إحداثيات: [[24.8417, 46.7164], [24.6742, 46.6917], [24.6881, 46.6847]]
+            },
+            {
+                رقم: "الخط 2",
+                محطات: ["الشفا", "الملز", "النخيل"],
+                إحداثيات: [[24.6253, 46.7592], [24.6742, 46.6917], [24.7236, 46.6528]]
+            }
+        ];
+
+        // تهيئة الخريطة
+‏        const خريطة = L.map('خريطة').setView([24.7136, 46.6753], 12);
+‏        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(خريطة);
+
+        // عرض المسارات
+        المسارات.forEach(مسار => {
+‏            const عنصر = document.createElement('div');
+            عنصر.className = 'مسار';
+            عنصر.innerHTML = `
+‏                <h3>🚌 ${مسار.رقم}</h3>
+‏                <p>${مسار.محطات.join(' → ')}</p>
+            `;
+            
+            عنصر.addEventListener('click', () => {
+                خريطة.eachLayer(layer => layer instanceof L.Polyline && خريطة.removeLayer(layer));
+‏                L.polyline(مسار.إحداثيات, {color: '#2d572c'}).addTo(خريطة);
+                خريطة.fitBounds(مسار.إحداثيات);
+            });
+
+‏            document.getElementById('قائمة-المسارات').appendChild(عنصر);
+            
+            // إضافة العلامات
+            مسار.إحداثيات.forEach((coord, index) => {
+‏                L.marker(coord)
+‏                 .addTo(خريطة)
+‏                 .bindPopup(`<b style="color:#2d572c">${مسار.محطات[index]}</b>`);
+            });
+        });
+‏    </script>
+‏</body>
+‏</html>
