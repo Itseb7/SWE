@@ -40,7 +40,7 @@ popup.addEventListener("click", (event) => {
     if (event.target === popup) {
         popup.style.display = "none";
     }
-});fetch("https://api.rcrc.gov.sa/bus-routes") // ضع الرابط الصحيح للـ API هنا
+});fetch("https://opendata.rcrc.gov.sa/terms/terms-and-conditions.pdf") // ضع الرابط الصحيح للـ API هنا
 .then(response => response.json())
 .then(data => {
     console.log(data); // عرض البيانات في وحدة التحكم
