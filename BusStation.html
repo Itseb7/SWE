@@ -1,58 +1,100 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusStation</title>
-    <link rel="stylesheet" href="BusStation.css">
+    <title>مسارات محطات الباص في الرياض</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            direction: rtl;
+            text-align: right;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #27ae60;
+        }
+        .route {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 18px;
+        }
+        .route:hover {
+            background-color: #27ae60;
+        }
+        .stations {
+            display: none;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .station {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- شريط العنوان والبحث -->
-    <header>
-        <h2>المسارات</h2>
-        <input type="text" placeholder="ابحث عن مسار أو محطة">
-    </header>
+<div class="container">
+    <h1>مسارات محطات الباص في الرياض</h1>
 
-    <!-- أزرار التبديل بين الحافلات والمترو -->
-    <div class="tabs">
-        <button class="active">حافلة</button>
-        <button>مترو</button>
+    <div class="route" onclick="toggleStations('route1')">
+‎        مسار 1: طريق الملك عبدالله
+    </div>
+    <div id="route1" class="stations">
+        <div class="station">محطة 1: الدائري الشرقي</div>
+        <div class="station">محطة 2: الرياض جاليري</div>
+        <div class="station">محطة 3: مركز الملك عبد الله المالي</div>
+        <div class="station">محطة 4: النخيل مول</div>
     </div>
 
-    <!-- قائمة المسارات -->
-    <div class="routes">
-        <div class="route" data-route="7" data-stations="مركز النقل العام,210 البطحاء,208 البطحاء,207 البطحاء,206 البطحاء,205 البطحاء,204 البطحاء,203 البطحاء,202 البطحاء,201 البطحاء,610 المربع,401 الوشم">
-            <span class="route-number">7</span>
-            <p>مركز النقل العام - جامعة الملك سعود</p>
-        </div>
-        <div class="route" data-route="8" data-stations="البطحاء, الصحافة">
-            <span class="route-number">8</span>
-            <p>البطحاء - الصحافة</p>
-        </div>
-        <div class="route" data-route="9" data-stations="مركز النقل العام, سوق الشمال للخضار">
-            <span class="route-number">9</span>
-            <p>مركز النقل العام - سوق الشمال للخضار</p>
-        </div>
+    <div class="route" onclick="toggleStations('route2')">
+‎        مسار 2: طريق الملك فهد
+    </div>
+    <div id="route2" class="stations">
+        <div class="station">محطة 1: العليا</div>
+        <div class="station">محطة 2: مكتبة الملك فهد</div>
+        <div class="station">محطة 3: برج المملكة</div>
+        <div class="station">محطة 4: حي السفارات</div>
     </div>
 
-    <!-- نافذة العرض -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close-btn">&times;</span>
-            <h3 id="popup-title"></h3>
-            <div id="station-list"></div>
-        </div>
+    <div class="route" onclick="toggleStations('route3')">
+‎        مسار 3: طريق المطار
+    </div>
+    <div id="route3" class="stations">
+        <div class="station">محطة 1: محطة المطار</div>
+        <div class="station">محطة 2: حي الرمال</div>
+        <div class="station">محطة 3: حي السليمانية</div>
     </div>
 
-    <!-- شريط التنقل السفلي -->
-    <nav class="bottom-nav">
-        <a href="#" class="active">الرئيسية</a>
-        <a href="#">المسارات</a>
-        <a href="#">التذاكر</a>
-        <a href="#">المفضلة</a>
-    </nav>
+</div>
 
-    <script src="script.js"></script>
+<script>
+    function toggleStations(routeId) {
+        const stations = document.getElementById(routeId);
+        if (stations.style.display === "none" || stations.style.display === "") {
+            stations.style.display = "block";
+        } else {
+            stations.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
