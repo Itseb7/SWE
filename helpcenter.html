@@ -130,3 +130,153 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - مترو الرياض</title>
+    <style>
+        /* التنسيقات العامة */
+        body {
+            margin: 0;
+            font-family: 'Neo Sans Arabic', sans-serif;
+            background: #f8f8f8;
+        }
+
+        /* شريط التنقل */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* قسم الاتصال */
+        .contact-section {
+            margin: 25px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-method:last-child {
+            border-bottom: none;
+        }
+
+        /* نموذج الملاحظات */
+        .feedback-form {
+            margin: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 10px 0;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #007BFF;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 480px) {
+            .contact-section {
+                margin: 15px;
+            }
+            
+            .nav-btn {
+                padding: 6px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <button class="nav-btn">← رجوع</button>
+        <h1>اتصل بنا</h1>
+        <button class="nav-btn">الأسئلة الشائعة</button>
+    </nav>
+
+    <div class="contact-section">
+        <div class="contact-method">
+            <img src="phone-icon.png" width="30" alt="رمز الهاتف">
+            <a href="tel:+966112345678" style="color: #007BFF; text-decoration: none;">+966 11 234 5678</a>
+        </div>
+
+        <div class="contact-method">
+            <img src="email-icon.png" width="30" alt="رمز البريد">
+            <a href="mailto:info@riyadhmetro.com" style="color: #007BFF; text-decoration: none;">info@riyadhmetro.com</a>
+        </div>
+    </div>
+
+    <form class="feedback-form">
+        <textarea 
+            placeholder="اكتب رسالتك هنا..." 
+            aria-label="حقل إدخال الملاحظات"
+            required
+        ></textarea>
+        <button type="submit" class="submit-btn">إرسال الرسالة</button>
+    </form>
+
+    <script>
+        // معالجة إرسال النموذج
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const message = document.querySelector('textarea').value;
+            
+            if(message.trim()) {
+                // هنا يمكنك إضافة منطق إرسال البيانات للخادم
+                alert('تم استلام رسالتك بنجاح، شكرًا لك!');
+                e.target.reset();
+            } else {
+                alert('الرجاء كتابة رسالة قبل الإرسال');
+            }
+        });
+
+        // إضافة تأثيرات التفاعل للأزرار
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // إضافة منطق التنقل هنا
+                console.log('تم النقر على زر:', btn.textContent);
+            });
+        });
+    </script>
+</body>
+</html>
