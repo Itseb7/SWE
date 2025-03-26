@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .title {
+    text-align: center;
+    margin: 20px;
+    color: #009999;
+    font-size: 24px;
+  }
+  
+  .route-list {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .route-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fefefe;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 2px solid;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .route-box:hover {
+    transform: scale(1.02);
+  }
+  
+  .route-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .route-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+  }
+  
+  .arrow {
+    font-size: 24px;
+    color: gray;
+    font-weight: bold;
+    margin-left: auto;
+  }
+  
+  .blue   { border-color: #009999 ; }
+  .red    { border-color: #28a745; }
+  .orange { border-color: #28a745; }
+  .yellow { border-color: #28a745; }
+  .green  { border-color: #28a745; }
+  .purple { border-color: #28a745; }
+  
+  .blue .circle   { background-color: #009999 ; }
+  .red .circle    { background-color: #009999; }
+  .orange .circle { background-color: #28a745; }
+  .yellow .circle { background-color: #28a745; color: white; }
+  .green .circle  { background-color: #28a745; }
+  .purple .circle { background-color: #28a745; }
+  
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fefefe;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .nav-btn {
+    background-color: #e0f5f4;
+    border: 2px solid #009999;
+    color: #009999;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .nav-btn.active {
+    background-color: #009999;
+    color: white;
+  }
+  .salik-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.9;
+    z-index: 100;
+  }
