@@ -1,63 +1,146 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز المساعدة</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Help Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            background-color: #324552;
+            background: linear-gradient(to right, #e2e2e2, #92d5de);
+        }
+        .container {
+            background: #fff;
+            width: 600px;
+            padding: 2rem;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        .faq-item span {
+            position: absolute;
+            right: 10px;
+            font-weight: bold;
+        }
+        .answer {
+            display: none;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+        .contact-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        input {
+            color: inherit;
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #757575;
+            padding-left: 1.5rem;
+            font-size: 15px;
+        }
+        .input-group {
+            padding: 1% 0;
+            position: relative;
+        }
+        input:focus {
+            background-color: transparent;
+            outline: transparent;
+            border-bottom: 2px solid hsl(327, 90%, 28%);
+        }
+        button {
+            font-size: 1.1rem;
+            padding: 10px 0;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            width: 100%;
+            background: rgb(99, 181, 193);
+            color: white;
+            cursor: pointer;
+            transition: 0.5s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #07001f;
+        }
+    </style>
 </head>
 <body>
+    <h1>Help Center</h1>
     <div class="container">
-        <div class="tabs">
-            <button class="tab-button active" onclick="showSection('faq')">الأسئلة الشائعة</button>
-            <button class="tab-button" onclick="showSection('contact')">اتصل بنا</button>
+        <h2>FAQ</h2>
+        <div class="faq-item" onclick="toggleAnswer(0)">What are the ticket prices for Riyadh Metro? <span>▼</span>
+            <div class="answer">Different options available: 2 hours - 4 SAR, 3 days - 20 SAR, 7 days - 40 SAR, 30 days - 140 SAR.</div>
         </div>
-
-        <div id="faq" class="content-section">
-            <div class="faq-item" onclick="toggleAnswer(this)">
-                <div class="question">
-                    <span>ما هي أسعار تذاكر مترو الرياض؟</span>
-                    <span class="arrow">▶</span>
-                </div>
-                <div class="answer">تذكرة ساعتين: 4 ريال - 3 أيام: 20 ريال - 7 أيام: 40 ريال - 30 يوم: 140 ريال</div>
-            </div>
-
-            <div class="faq-item" onclick="toggleAnswer(this)">
-                <div class="question">
-                    <span>هل يحتاج الأطفال إلى تذكرة؟</span>
-                    <span class="arrow">▶</span>
-                </div>
-                <div class="answer">الأطفال أقل من 6 سنوات يركبون مجانًا ولكن يجب أن يكونوا برفقة شخص بالغ.</div>
-            </div>
-
-            <div class="faq-item" onclick="toggleAnswer(this)">
-                <div class="question">
-                    <span>أين يمكنني شراء التذكرة؟</span>
-                    <span class="arrow">▶</span>
-                </div>
-                <div class="answer">يمكن شراء التذاكر من مكاتب التذاكر في محطات المترو أو عبر التطبيق أو باستخدام بطاقات الدفع.</div>
-            </div>
-
-            <div class="faq-item" onclick="toggleAnswer(this)">
-                <div class="question">
-                    <span>كيف يمكنني الدفع عبر تطبيق سالك؟</span>
-                    <span class="arrow">▶</span>
-                </div>
-                <div class="answer">يمكن الدفع عبر Apple Pay (لأجهزة iOS) أو بطاقات الائتمان والخصم (مدى، فيزا، ماستر كارد).</div>
-            </div>
+        <div class="faq-item" onclick="toggleAnswer(1)">Do children need a ticket? <span>▼</span>
+            <div class="answer">Children under 6 years old can travel for free but must be accompanied by an adult.</div>
         </div>
-
-        <div id="contact" class="content-section hidden">
-            <div class="contact-box">
-                <p><strong>رقم الهاتف:</strong> 19933</p>
-                <p><strong>البريد الإلكتروني:</strong> customercare@riyadhbus.sa</p>
-                <label for="feedback">ملاحظاتك:</label>
-                <textarea id="feedback" placeholder="اكتب رسالتك هنا..."></textarea>
-                <button onclick="submitFeedback()">إرسال</button>
-            </div>
+        <div class="faq-item" onclick="toggleAnswer(2)">Where can I buy my ticket? <span>▼</span>
+            <div class="answer">Tickets can be purchased at station offices, through the "Salik" app, or via bank cards and Apple Pay.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(3)">How can I pay through the Salik app? <span>▼</span>
+            <div class="answer">You can pay using Apple Pay or credit cards (Mada, Visa, Mastercard).</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(4)">Can I use a single ticket for multiple rides? <span>▼</span>
+            <div class="answer">A single ticket is valid for one continuous journey. Transfers require another ticket.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(5)">What are the working hours of Riyadh Metro? <span>▼</span>
+            <div class="answer">Riyadh Metro operates from 6 AM to midnight, seven days a week.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(6)">Is there a discount for students and seniors? <span>▼</span>
+            <div class="answer">Yes, students and seniors can apply for discounted fares through official channels.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(7)">Are there parking facilities at metro stations? <span>▼</span>
+            <div class="answer">Yes, selected metro stations offer parking spaces for passengers.</div>
+        </div>
+        <div class="faq-item" onclick="toggleAnswer(8)">Can I carry luggage on the metro? <span>▼</span>
+            <div class="answer">Small bags are allowed, but large suitcases must follow the baggage policy.</div>
         </div>
     </div>
-
-    <script src="script.js"></script>
+    <div class="container">
+        <h2>Contact Us</h2>
+        <div class="contact-item">📞 Phone: 19933</div>
+        <div class="contact-item">✉️ Email: customercare@riyadhbus.sa</div>
+        <div class="contact-item">
+            <label for="feedback">Feedback:</label>
+            <input type="text" id="feedback" placeholder="Write your feedback...">
+            <button onclick="submitFeedback()">Submit</button>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(index) {
+            var answers = document.querySelectorAll('.answer');
+            answers[index].style.display = answers[index].style.display === 'block' ? 'none' : 'block';
+        }
+        function submitFeedback() {
+            var feedbackInput = document.getElementById('feedback');
+            if (feedbackInput.value.trim() !== "") {
+                alert("Your feedback has been submitted. Thank you!");
+                feedbackInput.value = ""; // Clear the text field after submission
+            } else {
+                alert("Please enter your feedback first.");
+            }
+        }
+    </script>
 </body>
 </html>
