@@ -6,49 +6,81 @@
   <link rel="stylesheet" href="salik.css">
 </head>
 <body class="fade-in">
-    <img src="logo.png" alt="Salik Logo" 
-    class="salik-logo">
-  <div class="container">
-    <h2>Select Tickets</h2>
+    <img src="logo.png" alt="Salik Logo" class="salik-logo">
+    <div class="container">
+        <h2>Select Tickets</h2>
 
-    <div class="ticket-box">
-      <div class="ticket-header">Regular Ticket - 4 SAR</div>
-      <div class="counter">
-        <button onclick="updateCount('regular', -1)">-</button>
-        <span id="regular-count">0</span>
-        <button onclick="updateCount('regular', 1)">+</button>
-      </div>
+        <div class="ticket-box">
+            <div class="ticket-header">Regular Ticket - 4 SAR</div>
+            <div class="counter">
+                <button onclick="updateCount('regular', -1)">-</button>
+                <span id="regular-count">0</span>
+                <button onclick="updateCount('regular', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="ticket-box">
+            <div class="ticket-header">Daily Ticket - 10 SAR</div>
+            <div class="counter">
+                <button onclick="updateCount('daily', -1)">-</button>
+                <span id="daily-count">0</span>
+                <button onclick="updateCount('daily', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="ticket-box">
+            <div class="ticket-header">Weekly Ticket - 25 SAR</div>
+            <div class="counter">
+                <button onclick="updateCount('weekly', -1)">-</button>
+                <span id="weekly-count">0</span>
+                <button onclick="updateCount('weekly', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="total-box">
+            Total: <span id="total-amount">0</span> SAR
+        </div>
+
+        <button class="main-btn" onclick="goToSummary()">Continue</button>
+        <div id="error-msg" style="color: red; text-align: center; margin-top: 10px;"></div>
+        <a href="homepage.html" class="back-arrow">← Back to Home</a>
     </div>
 
-    <div class="ticket-box">
-      <div class="ticket-header">Daily Ticket - 10 SAR</div>
-      <div class="counter">
-        <button onclick="updateCount('daily', -1)">-</button>
-        <span id="daily-count">0</span>
-        <button onclick="updateCount('daily', 1)">+</button>
-      </div>
-    </div>
+    <script src="main.js"></script>
 
-    <div class="ticket-box">
-      <div class="ticket-header">Weekly Ticket - 25 SAR</div>
-      <div class="counter">
-        <button onclick="updateCount('weekly', -1)">-</button>
-        <span id="weekly-count">0</span>
-        <button onclick="updateCount('weekly', 1)">+</button>
-      </div>
-    </div>
+    <script>
+        // تحديث عدد التذاكر
+        let ticketData = {
+            regular: 0,
+            daily: 0,
+            weekly: 0
+        };
 
-    <div class="total-box">
-      Total: <span id="total-amount">0</span> SAR
-    </div>
+        function updateCount(ticketType, change) {
+            ticketData[ticketType] += change;
+            if (ticketData[ticketType] < 0) ticketData[ticketType] = 0;
+            document.getElementById(`${ticketType}-count`).textContent = ticketData[ticketType];
+            updateTotal();
+        }
 
-    <button class="main-btn" onclick="goToSummary()">Continue</button>
-    <div id="error-msg" style="color: red; text-align: center; margin-top: 10px;"></div>
-    <a href="homepage.html" class="back-arrow">← Back to Home</a>
+        function updateTotal() {
+            let total = (ticketData.regular * 4) + (ticketData.daily * 10) + (ticketData.weekly * 25);
 
-  </div>
+            // إذا كان هناك خصم طبقًا للموقع (تحقق من التخزين المحلي)
+            if (localStorage.getItem("applyDiscount") === "true") {
+                total *= 0.5;  // خصم 50%
+            }
 
-  <script src="main.js"></script>
+            document.getElementById("total-amount").textContent = total.toFixed(2);
+        }
 
+        function goToSummary() {
+            // تخزين بيانات التذاكر في التخزين المحلي
+            localStorage.setItem("tickets", JSON.stringify(ticketData));
+            localStorage.setItem("total", document.getElementById("total-amount").textContent);
+
+            window.location.href = "summary.html"; // الانتقال إلى صفحة ملخص الطلب
+        }
+    </script>
 </body>
 </html>

@@ -13,9 +13,8 @@
   </style>
 </head>
 <body class="fade-in">
-   <img src="logo.png" alt="Salik Logo" 
-    class="salik-logo">
-  <a href="ticket.html" class="back-arrow">← Back</a>
+   <img src="logo.png" alt="Salik Logo" class="salik-logo">
+   <a href="ticket.html" class="back-arrow">← Back</a>
 
   <div class="container">
     <h2>Order Summary</h2>
@@ -53,7 +52,13 @@
       window.location.href = "ticket.html";
     }
 
-    totalSpan.textContent = total;
+    // حساب الخصم هنا
+    let totalAmount = parseFloat(total);
+    if (localStorage.getItem("applyDiscount") === "true") {
+      totalAmount *= 0.5; // تطبيق خصم 50%
+    }
+
+    totalSpan.textContent = totalAmount.toFixed(2);
 
     function goToPayment() {
       document.body.classList.remove('fade-in');

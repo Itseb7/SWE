@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Special Tickets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: #324552;
+            background: linear-gradient(to right, #e2e2e2, #92d5de);
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            width: 450px;
+            padding: 2rem;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+            text-align: center;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .special-btn {
+            font-size: 1.3rem;
+            padding: 15px;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            width: 100%;
+            margin: 15px 0;
+            background: #009999;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.4s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .special-btn:hover {
+            background: #07001f;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .input-group {
+            padding: 1% 0;
+            position: relative;
+        }
+
+        label {
+            color: #757575;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #757575;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .instruction-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #444;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .special-btn {
+                font-size: 1.1rem;
+                padding: 12px;
+            }
+
+            input {
+                font-size: 0.9rem;
+            }
+        }
+        .salik-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.9;
+    z-index: 100;
+  }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="form-title">Special Tickets</h2>
+        <img src="logo.png" alt="Salik Logo" 
+        class="salik-logo">
+        <button class="special-btn" onclick="verifyEligibility('cancer')">Cancer Warriors</button>
+        <button class="special-btn" onclick="verifyEligibility('elderly')">Elderly (60+)</button>
+        <button class="special-btn" onclick="verifyEligibility('disabled')">Disabled</button>
+        <button class="special-btn" onclick="verifyEligibility('student')">Students</button>
+
+        <p id="instruction" class="instruction-text"></p>
+
+        <div class="input-group hidden" id="fileUploadGroup">
+            <label id="fileLabel" for="fileInput"></label>
+            <input type="file" id="fileInput" accept="image/*,application/pdf">
+        </div>
+
+        <div class="input-group hidden" id="textInputGroup">
+            <label id="textLabel" for="textInput"></label>
+            <input type="text" id="textInput">
+        </div>
+
+        <p id="message" class="error-message"></p>
+    </div>
+
+    <script>
+        function verifyEligibility(type) {
+            const instruction = document.getElementById("instruction");
+            const fileUploadGroup = document.getElementById("fileUploadGroup");
+            const fileLabel = document.getElementById("fileLabel");
+            const fileInput = document.getElementById("fileInput");
+            const textInputGroup = document.getElementById("textInputGroup");
+            const textLabel = document.getElementById("textLabel");
+            const textInput = document.getElementById("textInput");
+            const message = document.getElementById("message");
+
+            fileUploadGroup.classList.add("hidden");
+            textInputGroup.classList.add("hidden");
+            message.textContent = "";
+            instruction.textContent = "";
+
+            if (type === "cancer" || type === "disabled") {
+                instruction.textContent = "Please attach a medical report to verify eligibility:";
+                fileLabel.textContent = "Upload Medical Report";
+                fileUploadGroup.classList.remove("hidden");
+                fileInput.onchange = function() {
+                    if (fileInput.files.length > 0) {
+                        localStorage.setItem("applyDiscount", "true");
+                        window.location.href = "ticket.html";
+                    }
+                };
+            } else if (type === "elderly") {
+                instruction.textContent = "Please attach a birth certificate to verify age:";
+                fileLabel.textContent = "Upload Birth Certificate";
+                fileUploadGroup.classList.remove("hidden");
+                fileInput.onchange = function() {
+                    if (fileInput.files.length > 0) {
+                        localStorage.setItem("applyDiscount", "true");
+                        window.location.href = "ticket.html";
+                    }
+                };
+            } else if (type === "student") {
+                instruction.textContent = "Please enter your university student ID to verify eligibility:";
+                textLabel.textContent = " Student ID ";
+                textInputGroup.classList.remove("hidden");
+                textInput.onkeypress = function(event) {
+                    if (event.key === "Enter" && textInput.value.trim() !== "") {
+                        localStorage.setItem("applyDiscount", "true");
+                        window.location.href = "ticket.html";
+                    }
+                };
+            }
+        }
+    </script>
+</body>
+</html>
