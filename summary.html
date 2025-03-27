@@ -55,7 +55,7 @@
     // حساب الخصم هنا
     let totalAmount = parseFloat(total);
     if (localStorage.getItem("applyDiscount") === "true") {
-      totalAmount *= 0.5; // تطبيق خصم 50%
+      totalAmount ; // تطبيق خصم 50%
     }
 
     totalSpan.textContent = totalAmount.toFixed(2);
