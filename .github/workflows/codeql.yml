@@ -1,0 +1,31 @@
+name: CodeQL Analysis
+
+on: [push, pull_request]
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up CodeQL
+        uses: github/codeql-action/setup@v2
+        with:
+          languages: javascript
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: security-and-quality
+          output: codeql-results.sarif
+
+      - name: Upload CodeQL Results
+        uses: github/codeql-action/upload-results@v2
+        with:
+          results: codeql-results.sarif
