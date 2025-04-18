@@ -1,0 +1,53 @@
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\BusStation.js[24m[0m
+[0m  [2m1:10[22m  [31merror[39m  'goTo' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\MetroRoutes.js[24m[0m
+[0m  [2m1:10[22m  [31merror[39m  'goTo' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\PurpleRoute.js[24m[0m
+[0m  [2m1:10[22m  [31merror[39m  'goToMap' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\RedRoute.js[24m[0m
+[0m  [2m1:10[22m  [31merror[39m  'goToMap' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\axi.js[24m[0m
+[0m   [2m1:15[22m  [31merror[39m  'require' is not defined                               [2mno-undef[22m[0m
+[0m   [2m2:12[22m  [31merror[39m  'require' is not defined                               [2mno-undef[22m[0m
+[0m   [2m5:7[22m   [31merror[39m  'YOUR_PROJECT_KEY' is assigned a value but never used  [2mno-unused-vars[22m[0m
+[0m  [2m61:24[22m  [31merror[39m  'issue' is defined but never used                      [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\firebaseauth.js[24m[0m
+[0m  [2m20:8[22m  [31merror[39m  'auth' is assigned a value but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\greenRoute.js[24m[0m
+[0m  [2m1:10[22m  [31merror[39m  'goToMap' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\helpcenter.js[24m[0m
+[0m   [2m1:10[22m  [31merror[39m  'toggleAnswer' is defined but never used    [2mno-unused-vars[22m[0m
+[0m   [2m5:10[22m  [31merror[39m  'showSection' is defined but never used     [2mno-unused-vars[22m[0m
+[0m  [2m23:10[22m  [31merror[39m  'submitFeedback' is defined but never used  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\home.js[24m[0m
+[0m  [2m59:10[22m  [31merror[39m  'getTranslation' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m76:5[22m   [31merror[39m  Unreachable code                            [2mno-unreachable[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\homepage.js[24m[0m
+[0m   [2m2:18[22m  [31merror[39m  'onAuthStateChanged' is defined but never used  [2mno-unused-vars[22m[0m
+[0m   [2m3:22[22m  [31merror[39m  'getDoc' is defined but never used              [2mno-unused-vars[22m[0m
+[0m   [2m3:30[22m  [31merror[39m  'doc' is defined but never used                 [2mno-unused-vars[22m[0m
+[0m  [2m17:9[22m   [31merror[39m  'app' is assigned a value but never used        [2mno-unused-vars[22m[0m
+[0m  [2m20:9[22m   [31merror[39m  'db' is assigned a value but never used         [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\main.js[24m[0m
+[0m  [2m14:12[22m  [31merror[39m  'updateCount' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m31:12[22m  [31merror[39m  'goToSummary' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m48:14[22m  [31merror[39m  'goHome' is defined but never used       [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\DELL\Documents\GitHub\SWE\metro.js[24m[0m
+[0m   [2m2:13[22m  [31merror[39m  'L' is not defined  [2mno-undef[22m[0m
+[0m   [2m5:1[22m   [31merror[39m  'L' is not defined  [2mno-undef[22m[0m
+[0m  [2m93:18[22m  [31merror[39m  'L' is not defined  [2mno-undef[22m[0m
+[0m[0m
+[0m[31m[1m✖ 26 problems (26 errors, 0 warnings)[22m[39m[0m
+[0m[31m[1m[22m[39m[0m
