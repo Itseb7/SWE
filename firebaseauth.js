@@ -1,11 +1,17 @@
- 
- // Import the functions you need from the SDKs you need
- import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
- import{getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from"https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js"
-import{getFirestore,setDoc,doc} from"https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js"
-import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
- // Your web app's Firebase configuration
+
  const firebaseConfig = {
    apiKey: "AIzaSyBOzPAr7-VSFm3y6SE7W_s1x3p-xz3HcXg",
    authDomain: "lastlogin-c910d.firebaseapp.com",
@@ -15,98 +21,93 @@ import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/fir
    appId: "1:897537946997:web:7bc9f2857552ccd42e4f3c"
  };
 
- // Initialize Firebase
- const app = initializeApp(firebaseConfig);
- const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
+// عرض رسالة
+function showMessage(message, divId) {
+  const messageDiv = document.getElementById(divId);
+  messageDiv.style.display = "block";
+  messageDiv.innerHTML = message;
+  messageDiv.style.opacity = 1;
+  setTimeout(() => {
+    messageDiv.style.opacity = 0;
+  }, 5000);
+}
 
+// ===== إنشاء حساب =====
+const signUp = document.getElementById("submitSignUp");
+signUp?.addEventListener("click", async (event) => {
+  event.preventDefault();
 
- function showMessage(message, divId){
-    var messageDiv=document.getElementById(divId);
-    messageDiv.style.display="block";
-    messageDiv.innerHTML=message;
-    messageDiv.style.opacity=1;
-    setTimeout(function(){
-        messageDiv.style.opacity=0;
-    },5000);
- }
- const signUp=document.getElementById('submitSignUp');
- signUp.addEventListener('click', (event)=>{
-    event.preventDefault();
-    const email=document.getElementById('rEmail').value;
-    const password=document.getElementById('rPassword').value;
-    const firstName=document.getElementById('fName').value;
-    const lastName=document.getElementById('lName').value;
+  const email = document.getElementById("rEmail").value.trim();
+  const password = document.getElementById("rPassword").value;
+  const firstName = document.getElementById("fName").value.trim();
+  const lastName = document.getElementById("lName").value.trim();
 
-    const auth=getAuth();
-    const db=getFirestore();
+  try {
+    const hashedPassword = await dcodeIO.bcrypt.hash(password, 10);
 
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential)=>{
-        const user=userCredential.user;
-        const userData={
-            email: email,
-            firstName: firstName,
-            lastName:lastName
-        };
-        showMessage('Account Created Successfully', 'signUpMessage');
-        const docRef=doc(db, "users", user.uid);
-        setDoc(docRef,userData)
-        .then(()=>{
-            window.location.href='index.html';
-        })
-        .catch((error)=>{
-            console.error("error writing document", error);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-        });
-    })
-    .catch((error)=>{
-        const errorCode=error.code;
-        if(errorCode=='auth/email-already-in-use'){
-            showMessage('Email Address Already Exists !!!', 'signUpMessage');
-        }
-        else{
-            showMessage('unable to create User', 'signUpMessage');
-        }
-    })
- });
+    await setDoc(doc(db, "users", user.uid), {
+      email,
+      firstName,
+      lastName,
+      password: hashedPassword
+    });
 
- const signIn=document.getElementById('submitSignIn');
- signIn.addEventListener('click', (event)=>{
-    event.preventDefault();
-    const email=document.getElementById('email').value;
-    const password=document.getElementById('password').value;
-    const auth=getAuth();
-
-    signInWithEmailAndPassword(auth, email,password)
-    .then((userCredential)=>{
-        showMessage('login is successful', 'signInMessage');
-        const user=userCredential.user;
-        localStorage.setItem('loggedInUserId', user.uid);
-        window.location.href='homepage.html';
-    })
-    .catch((error)=>{
-        const errorCode=error.code;
-        if(errorCode==='auth/invalid-credential'){
-            showMessage('Incorrect Email or Password', 'signInMessage');
-        }
-        else{
-            showMessage('Account does not Exist', 'signInMessage');
-        }
-    })
-    // Google Sign-In
-document.getElementById("googleSignInBtn").addEventListener("click", function() {
-    const provider = new GoogleAuthProvider();
-
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            console.log("Google sign-in successful:", result.user);
-            alert("Signed in with Google!");
-            window.location.href = "dashboard.html"; // Redirect after Google sign-in
-        })
-        .catch((error) => {
-            console.error(" Google sign-in error:", error.message);
-            alert("Error: " + error.message);
-        });
+    showMessage("Account Created Successfully", "signUpMessage");
+    window.location.href = "index.html";
+  } catch (error) {
+    const errorCode = error.code;
+    if (errorCode === "auth/email-already-in-use") {
+      showMessage("Email Address Already Exists !!!", "signUpMessage");
+    } else {
+      showMessage("Unable to create User", "signUpMessage");
+      console.error("SignUp Error:", error); // علشان تتابعين الخطأ الحقيقي
+    }
+  }
 });
- })
+
+// ===== تسجيل الدخول =====
+const signIn = document.getElementById("submitSignIn");
+signIn?.addEventListener("click", async (event) => {
+  event.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    const docRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(docRef);
+
+    if (userDoc.exists()) {
+      const savedHash = userDoc.data().password;
+      const match = await dcodeIO.bcrypt.compare(password, savedHash);
+
+      if (match) {
+        showMessage("Login successful", "signInMessage");
+        localStorage.setItem("loggedInUserId", user.uid);
+        window.location.href = "homepage.html";
+      } else {
+        showMessage("Invalid password", "signInMessage");
+      }
+    } else {
+      showMessage("User data not found", "signInMessage");
+    }
+  } catch (error) {
+    const errorCode = error.code;
+    if (errorCode === "auth/invalid-credential") {
+      showMessage("Incorrect Email or Password", "signInMessage");
+    } else {
+      showMessage("Login failed: " + error.message, "signInMessage");
+      console.error("SignIn Error:", error); // علشان يوضح لك المشكلة بالتفصيل
+    }
+  }
+});
