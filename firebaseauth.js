@@ -1,31 +1,17 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
-import {
-  getFirestore,
-  setDoc,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBOzPAr7-VSFm3y6SE7W_s1x3p-xz3HcXg",
+  authDomain: "lastlogin-c910d.firebaseapp.com",
+  projectId: "lastlogin-c910d",
+  storageBucket: "lastlogin-c910d.firebasestorage.app",
+  messagingSenderId: "897537946997",
+  appId: "1:897537946997:web:7bc9f2857552ccd42e4f3c"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 
- const firebaseConfig = {
-   apiKey: "AIzaSyBOzPAr7-VSFm3y6SE7W_s1x3p-xz3HcXg",
-   authDomain: "lastlogin-c910d.firebaseapp.com",
-   projectId: "lastlogin-c910d",
-   storageBucket: "lastlogin-c910d.firebasestorage.app",
-   messagingSenderId: "897537946997",
-   appId: "1:897537946997:web:7bc9f2857552ccd42e4f3c"
- };
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-// عرض رسالة
 function showMessage(message, divId) {
   const messageDiv = document.getElementById(divId);
   messageDiv.style.display = "block";
@@ -46,13 +32,27 @@ signUp?.addEventListener("click", async (event) => {
   const firstName = document.getElementById("fName").value.trim();
   const lastName = document.getElementById("lName").value.trim();
 
-  try {
-    const hashedPassword = await dcodeIO.bcrypt.hash(password, 10);
+  // تحقق الباسورد
+  const isValidPassword =
+    password.length >= 8 &&
+    password.length <= 20 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /\d/.test(password) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  if (!isValidPassword) {
+    showMessage("Password does not meet the required criteria.", "signUpMessage");
+    return;
+  }
+
+  try {
+    const hashedPassword = await dcodeIO.bcrypt.hash(password,10);
+
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
     const user = userCredential.user;
 
-    await setDoc(doc(db, "users", user.uid), {
+    await db.collection("users").doc(user.uid).set({
       email,
       firstName,
       lastName,
@@ -60,14 +60,16 @@ signUp?.addEventListener("click", async (event) => {
     });
 
     showMessage("Account Created Successfully", "signUpMessage");
-    window.location.href = "index.html";
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1500);
   } catch (error) {
     const errorCode = error.code;
     if (errorCode === "auth/email-already-in-use") {
       showMessage("Email Address Already Exists !!!", "signUpMessage");
     } else {
       showMessage("Unable to create User", "signUpMessage");
-      console.error("SignUp Error:", error); // علشان تتابعين الخطأ الحقيقي
+      console.error("SignUp Error:", error);
     }
   }
 });
@@ -81,15 +83,15 @@ signIn?.addEventListener("click", async (event) => {
   const password = document.getElementById("password").value;
 
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await auth.signInWithEmailAndPassword(email, password);
     const user = userCredential.user;
 
-    const docRef = doc(db, "users", user.uid);
-    const userDoc = await getDoc(docRef);
+    const docRef = db.collection("users").doc(user.uid);
+    const userDoc = await docRef.get();
 
-    if (userDoc.exists()) {
+    if (userDoc.exists) {
       const savedHash = userDoc.data().password;
-      const match = await dcodeIO.bcrypt.compare(password, savedHash);
+      const match = await dcodeIO .bcrypt.compare(password, savedHash);
 
       if (match) {
         showMessage("Login successful", "signInMessage");
@@ -107,7 +109,10 @@ signIn?.addEventListener("click", async (event) => {
       showMessage("Incorrect Email or Password", "signInMessage");
     } else {
       showMessage("Login failed: " + error.message, "signInMessage");
-      console.error("SignIn Error:", error); // علشان يوضح لك المشكلة بالتفصيل
+      console.error("SignIn Error:", error);
     }
   }
 });
+
+
+

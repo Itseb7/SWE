@@ -6,7 +6,6 @@
   <title>Register & Login</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
-  <script type="module" src="firebaseauth.js"></script>
 </head>
 <body>
 
@@ -39,13 +38,22 @@
         <input type="password" id="rPassword" placeholder="Password" required />
         <label for="rPassword">Password</label>
         <small id="password-msg" style="color:red;"></small>
+
+        <!--  الشروط -->
+        <ul id="password-rules" style="margin-top: 10px; padding-left: 20px; font-size: 14px; color: gray;">
+          <li id="rule-length">• At least 8 characters</li>
+          <li id="rule-max">• Maximum 20 characters</li>
+          <li id="rule-number">• At least one number</li>
+          <li id="rule-uppercase">• At least one uppercase letter</li>
+          <li id="rule-lowercase">• At least one lowercase letter</li>
+          <li id="rule-special">• At least one special character (!@#$...)</li>
+        </ul>
       </div>
 
       <button class="btn" id="submitSignUp">Sign Up</button>
     </form>
 
     <p class="or">-----or-----</p>
-   
 
     <div class="links">
       <p>Already Have Account ?</p>
@@ -71,7 +79,6 @@
         <label for="password">Password</label>
       </div>
 
-      <!-- ✅ رابط استعادة كلمة المرور -->
       <p class="recover">
         <a href="reset-password.html">Forgot Password?</a>
       </p>
@@ -87,6 +94,12 @@
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+  <script src="firebaseauth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
