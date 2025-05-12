@@ -27,5 +27,5 @@ jobs:
         node tests/login.test.js
         node tests/register.test.js
         node tests/payment.test.js
-        node tests/tickets.test.js
+        node tests/ticket.test.js
 
