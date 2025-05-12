@@ -28,3 +28,4 @@ jobs:
         node tests/register.test.js
         node tests/payment.test.js
         node tests/tickets.test.js
+
