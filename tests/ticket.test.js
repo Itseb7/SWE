@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
   const page = await browser.newPage();
 
   // افتح الصفحة
-  await page.goto('file://' + __dirname + '/../tickets.html');
+  await page.goto('file://' + __dirname + '/../ticket.html');
 
   await page.click('text=Regular Ticket - 4 SAR'); // تأكد من ظهور العنصر
   await page.click('button:has-text("+")'); // أول + هو لتذكرة Regular
