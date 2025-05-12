@@ -1,12 +1,9 @@
 {
-  "name": "SWE",
+  "name": "swe-project",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"No tests yet\" && exit 0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "description": "SWE test scripts for CI/CD",
+  "scripts": {},
+  "devDependencies": {
+    "playwright": "^1.43.1"
+  }
 }
