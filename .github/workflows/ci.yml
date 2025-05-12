@@ -3,25 +3,25 @@ name: Run my tests
 on:
   push:
     branches:
-      - main  # يشغل الفحص لما تعدل في الفرع الرئيسي (main)
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # يشغل على جهاز لينكس افتراضي
+    runs-on: ubuntu-latest
 
     steps:
       - name: Get code
-        uses: actions/checkout@v2  # يسحب الكود
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.10'  # أو أي إصدار تستخدمه
+          node-version: '18'
 
-      - name: Install libraries
+      - name: Install dependencies
         run: |
-          pip install -r requirements.txt  # لتثبيت الحزم
+          npm install
 
-      - name: Run tests
+      - name: Run tests (skip if none found)
         run: |
-          pytest  # أو إذا كنت تستخدم أداة اختبار أخرى، غير هذا السطر
+          npm test --passWithNoTests
