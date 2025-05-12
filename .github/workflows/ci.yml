@@ -1,0 +1,27 @@
+name: Run my tests
+
+on:
+  push:
+    branches:
+      - main  # يشغل الفحص لما تعدل في الفرع الرئيسي (main)
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # يشغل على جهاز لينكس افتراضي
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v2  # يسحب الكود
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'  # أو أي إصدار تستخدمه
+
+      - name: Install libraries
+        run: |
+          pip install -r requirements.txt  # لتثبيت الحزم
+
+      - name: Run tests
+        run: |
+          pytest  # أو إذا كنت تستخدم أداة اختبار أخرى، غير هذا السطر
