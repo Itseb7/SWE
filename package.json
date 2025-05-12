@@ -1,9 +1,12 @@
 {
-  "devDependencies": {
-    "eslint": "^9.26.0",
-    "htmlhint": "^1.1.4",
-    "puppeteer": "^24.8.2",
-    "stylelint": "^16.19.1",
-    "stylelint-config-standard": "^38.0.0"
-  }
+  "name": "SWE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
